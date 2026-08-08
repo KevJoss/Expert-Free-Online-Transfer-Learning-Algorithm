@@ -1,7 +1,10 @@
 import numpy as np
 import torch
 import torch.nn as nn
-import dill as pickle
+try:
+    import dill as pickle
+except ImportError:
+    import pickle
 import os
 
 from utils import mkdir
