@@ -130,7 +130,7 @@ class MinSegmentTree(SegmentTree):
         return super(MinSegmentTree, self).reduce(start, end)
 
 
-
+import random
 SEED=None
 
 def set_seed(inSEED):
@@ -138,7 +138,7 @@ def set_seed(inSEED):
     SEED=inSEED
     if SEED:
         torch.manual_seed(SEED)
-        Random.seed(SEED)
+        random.seed(SEED)
 
 _BETA_START=.4
 
