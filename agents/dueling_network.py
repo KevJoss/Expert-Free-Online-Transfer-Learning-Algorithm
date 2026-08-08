@@ -431,8 +431,8 @@ class agent:
 
 
     def learn_from_samples(self, batch):
-        batch_action=[]; batch_done=[]; batch_state=[]; batch_next_state=[]; batch_reward=[]
-        batch_state, batch_action, batch_reward, batch_next_state, batch_done,_,_=transpose(batch)
+        batch_t = transpose(batch)
+        batch_state, batch_action, batch_reward, batch_next_state, batch_done = batch_t[:5]
         batch_state = torch.FloatTensor(batch_state).to(self.device)
         batch_action = torch.tensor(batch_action).to(self.device).unsqueeze(1)
         batch_reward = torch.FloatTensor(batch_reward).to(self.device)
