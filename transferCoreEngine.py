@@ -47,6 +47,9 @@ def select_teacher(agents, mode, transfer_buffers, ep_start_sharing, evaluation_
                 maxR=r
                 teacher=p
     elif(mode=="avg_uncertainty"):
+        for p in agents:
+            if(p.episode < ep_start_sharing):
+                return None  # too soon to share
         avg_uncertainty=[]
         for i in range(len(agents)):
             avg_uncertainty.append(transfer_buffers[i].get_avg_uncertainty())
