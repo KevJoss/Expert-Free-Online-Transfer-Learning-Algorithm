@@ -1,0 +1,41 @@
+{
+    "training": {
+        "env_name": "ALE/MsPacman-v5",
+        "num_episodes": 1800,
+        "num_agents": 5,
+        "max_episode_steps": 1600,
+        "buffer_memory_size": 10000
+    },
+    "dqn_agent": {
+        "learning_rate": 0.00001,
+        "betas": [
+            0.9,
+            0.999
+        ],
+        "gamma": 0.999,
+        "batch_size": 32,
+        "replay_buffer_size": 10000,
+        "target_update_interval": 1000,
+        "hidden_dim": [
+            128,
+            64
+        ],
+        "exploration_mode": "thompson",
+        "temperature": 1,
+        "warmup_episodes": 100,
+        "train_frequency": 1
+    },
+    "transfer": {
+        "transfer_frequency": 200,
+        "source_selection_mode": "avg_uncertainty",
+        "ep_start_sharing": 600,
+        "evaluation_range": 5,
+        "batch_transfer_size": 5000,
+        "rnd_minibatch_size": 32
+    },
+    "experiment": {
+        "num_simulations": 1,
+        "results_csv": "results/pacman/efo_tl_results_seed7.csv",
+        "models_dir": "results/pacman/models_seed7/"
+    }
+}

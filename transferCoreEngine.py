@@ -53,6 +53,11 @@ def select_teacher(agents, mode, transfer_buffers, ep_start_sharing, evaluation_
         avg_uncertainty=[]
         for i in range(len(agents)):
             avg_uncertainty.append(transfer_buffers[i].get_avg_uncertainty())
+
+        print("  [UNCERTAINTY] " + " | ".join(
+            f"A{i}={u:.6f}" for i, u in enumerate(avg_uncertainty)))
+        print(f"  [UNCERTAINTY] min=A{avg_uncertainty.index(min(avg_uncertainty))}")
+        
         teacher= agents[avg_uncertainty.index(min(avg_uncertainty))]
     else:
         raise BaseException("Invalid Source Selection Method")

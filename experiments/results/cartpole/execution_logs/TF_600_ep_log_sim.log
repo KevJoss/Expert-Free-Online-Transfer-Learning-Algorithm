@@ -1,0 +1,879 @@
+===========================================================================
+  EXPERIMENT CONFIGURATION SUMMARY  [configs/cart-pole_params.json]
+===========================================================================
+
+--- DUELING DQN NETWORK PARAMETERS ---
+  Input Layer           : FC(4, 128)
+  Hidden Layer          : FC(128, 64)
+  Advantage Layer       : FC(64, 2)
+  Value Layer           : FC(64, 1)
+  Activation            : ReLU
+  Loss                  : MSE
+  Optimizer             : Adam
+  Learning Rate         : 1e-05
+  Betas                 : [0.9, 0.999]
+  Gamma                 : 0.999
+  Mini Batch Size       : 32
+  Policy Update Step    : Cada 1 timesteps
+  Exploration Mode      : thompson (Temp=1)
+  Replay Buffer Size    : 10,000
+  Ep. Start Training    : 100 episodes
+
+--- EXPERT-FREE ONLINE TRANSFER LEARNING (EF-OnTL) PARAMETERS ---
+  Number of agents      : 5
+  Transfer Frequency    : Cada 200 episodes
+  Transfer Buffer Cap.  : 10,000 tuples
+  Source Selection      : avg_uncertainty
+  Filtering Criteria    : Higher Delta Confidence (TCS)
+  Budget (Presupuesto)  : 5000 tuples/event
+  Episode Start Transfer: 600 episodes
+  Max Timestep          : 400 timesteps/episode
+  Max Episode           : 1800 episodes
+===========================================================================
+
+
+======================================================================
+  RUNNING EF-OnTL algorithm (CartPole-v1)
+  Device: cuda | Agents: 5 | Episodes: 1800
+======================================================================
+
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+Episode 100/1800 | Train Calls: 0 | Elapsed: 35.6s | Recent Avg Reward: 21.60
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 200/1800 | Train Calls: 10651 | Elapsed: 134.1s | Recent Avg Reward: 15.40
+
+[TRANSFER EVENT] Episode 200/1800
+NUM_EPISODES // TRANSFER_FREQUENCY = 9
+  ℹ Transfer skipped (episode 200 < start 600 or no teacher)
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 300/1800 | Train Calls: 21499 | Elapsed: 237.4s | Recent Avg Reward: 20.60
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 400/1800 | Train Calls: 31210 | Elapsed: 332.4s | Recent Avg Reward: 14.00
+
+[TRANSFER EVENT] Episode 400/1800
+NUM_EPISODES // TRANSFER_FREQUENCY = 9
+  ℹ Transfer skipped (episode 400 < start 600 or no teacher)
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 500/1800 | Train Calls: 40632 | Elapsed: 425.3s | Recent Avg Reward: 21.80
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 600/1800 | Train Calls: 50387 | Elapsed: 519.5s | Recent Avg Reward: 16.80
+
+[TRANSFER EVENT] Episode 600/1800
+  ★ Teacher Selected: Agent 0
+C:\Users\Usuario\Documents\YachayTech\Research_Projects\Transfer_Learning_RL\code\efo_tl_pacman\Expert-Free-Online-Transfer-Learning-Algorithm\experiments\..\agents\dueling_network.py:436: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\utils\tensor_new.cpp:257.)
+  batch_state = torch.FloatTensor(batch_state).to(self.device)
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+    ↳ Transferred 10000 experiences -> Agent 4
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 700/1800 | Train Calls: 61159 | Elapsed: 629.3s | Recent Avg Reward: 16.20
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 800/1800 | Train Calls: 73839 | Elapsed: 757.2s | Recent Avg Reward: 24.40
+
+[TRANSFER EVENT] Episode 800/1800
+  ★ Teacher Selected: Agent 0
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+    ↳ Transferred 10000 experiences -> Agent 4
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 900/1800 | Train Calls: 89390 | Elapsed: 914.0s | Recent Avg Reward: 35.00
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 1000/1800 | Train Calls: 110052 | Elapsed: 1123.1s | Recent Avg Reward: 63.60
+
+[TRANSFER EVENT] Episode 1000/1800
+  ★ Teacher Selected: Agent 4
+    ↳ Transferred 10000 experiences -> Agent 0
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 1100/1800 | Train Calls: 138846 | Elapsed: 1415.3s | Recent Avg Reward: 75.20
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 1200/1800 | Train Calls: 187412 | Elapsed: 1909.5s | Recent Avg Reward: 179.80
+
+[TRANSFER EVENT] Episode 1200/1800
+  ★ Teacher Selected: Agent 0
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+    ↳ Transferred 10000 experiences -> Agent 4
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 1300/1800 | Train Calls: 276396 | Elapsed: 2814.6s | Recent Avg Reward: 174.00
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 1400/1800 | Train Calls: 408277 | Elapsed: 4170.4s | Recent Avg Reward: 360.80
+Updating target network.
+Updating target network.
+
+[TRANSFER EVENT] Episode 1400/1800
+  ★ Teacher Selected: Agent 0
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+    ↳ Transferred 10000 experiences -> Agent 4
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Episode 1500/1800 | Train Calls: 565344 | Elapsed: 5797.9s | Recent Avg Reward: 352.60
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.
+Updating target network.

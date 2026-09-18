@@ -1,0 +1,350 @@
+[LOG STARTED] exploration_pacman.py — 2026-08-15 19:57:35
+
+===========================================================================
+  EXPERIMENT CONFIGURATION SUMMARY  [configs/pacman_params.json]
+===========================================================================
+
+--- DUELING DQN NETWORK PARAMETERS ---
+  Input Layer           : FC(128, 128)
+  Hidden Layer          : FC(128, 64)
+  Advantage Layer       : FC(64, 9)
+  Value Layer           : FC(64, 1)
+  Activation            : ReLU
+  Loss                  : MSE
+  Optimizer             : Adam
+  Learning Rate         : 1e-05
+  Betas                 : [0.9, 0.999]
+  Gamma                 : 0.999
+  Mini Batch Size       : 32
+  Policy Update Step    : Cada 1 timesteps
+  Exploration Mode      : thompson (Temp=1)
+  Replay Buffer Size    : 10,000
+  Ep. Start Training    : 100 episodes
+
+--- EXPERT-FREE ONLINE TRANSFER LEARNING (EF-OnTL) PARAMETERS ---
+  Number of agents      : 5
+  Transfer Frequency    : Cada 200 episodes
+  Transfer Buffer Cap.  : 10,000 tuples
+  Source Selection      : avg_uncertainty
+  Filtering Criteria    : Higher Delta Confidence (TCS)
+  Budget (Presupuesto)  : 5000 tuples/event
+  Episode Start Transfer: 600 episodes
+  Max Timestep          : 1600 timesteps/episode
+  Max Episode           : 1800 episodes
+===========================================================================
+
+
+======================================================================
+  RUNNING EF-OnTL algorithm (MsPacman-v5)
+  Device: cuda | Agents: 5 | Episodes: 1800
+======================================================================
+
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+DDQN INITIALISED. Exploration is thompson, uses entropy False lr is 1e-05
+ Update target network every 1000
+
+======================================================================
+[SIM 0 START] 2026-08-15 19:57:41 | ENV: ALE/MsPacman-v5 | agents: 5 | episodes: 1800
+======================================================================
+
+
+
+[STATS] episode=    50  elapsed_s=    486.4  cum_steps=    127690
+        mean_ep_len=  510.8  max_ep_len=  869  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 100/1800 | Train Calls: 0 | Elapsed: 953.0s | Recent Avg Reward: 316.00
+
+
+[STATS] episode=   100  elapsed_s=    953.0  cum_steps=    251616
+        mean_ep_len=  495.7  max_ep_len=  887  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+
+[STATS] episode=   150  elapsed_s=   2519.9  cum_steps=    390972
+        mean_ep_len=  557.4  max_ep_len= 1057  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 200/1800 | Train Calls: 277660 | Elapsed: 4066.4s | Recent Avg Reward: 330.00
+
+
+[STATS] episode=   200  elapsed_s=   4066.4  cum_steps=    529276
+        mean_ep_len=  553.2  max_ep_len=  953  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+
+[TRANSFER EVENT] Episode 200/1800
+NUM_EPISODES // TRANSFER_FREQUENCY = 9
+  ℹ Transfer skipped (episode 200 < start 600 or no teacher)
+
+
+[STATS] episode=   250  elapsed_s=   5727.8  cum_steps=    675676
+        mean_ep_len=  585.6  max_ep_len=  979  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 300/1800 | Train Calls: 570058 | Elapsed: 7342.4s | Recent Avg Reward: 428.00
+
+
+[STATS] episode=   300  elapsed_s=   7342.4  cum_steps=    821674
+        mean_ep_len=  584.0  max_ep_len=  997  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+
+[STATS] episode=   350  elapsed_s=   9001.2  cum_steps=    966378
+        mean_ep_len=  578.8  max_ep_len=  961  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 400/1800 | Train Calls: 861694 | Elapsed: 10675.4s | Recent Avg Reward: 252.00
+
+
+[STATS] episode=   400  elapsed_s=  10675.4  cum_steps=   1113310
+        mean_ep_len=  587.7  max_ep_len= 1191  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+[TRANSFER EVENT] Episode 400/1800
+NUM_EPISODES // TRANSFER_FREQUENCY = 9
+  ℹ Transfer skipped (episode 400 < start 600 or no teacher)
+
+
+[STATS] episode=   450  elapsed_s=  12358.8  cum_steps=   1259976
+        mean_ep_len=  586.7  max_ep_len=  965  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 500/1800 | Train Calls: 1157790 | Elapsed: 14091.3s | Recent Avg Reward: 300.00
+
+
+[STATS] episode=   500  elapsed_s=  14091.3  cum_steps=   1409406
+        mean_ep_len=  597.7  max_ep_len= 1091  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+[STATS] episode=   550  elapsed_s=  15724.4  cum_steps=   1557090
+        mean_ep_len=  590.7  max_ep_len= 1013  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 600/1800 | Train Calls: 1450504 | Elapsed: 17337.0s | Recent Avg Reward: 288.00
+
+
+[STATS] episode=   600  elapsed_s=  17337.0  cum_steps=   1702120
+        mean_ep_len=  580.1  max_ep_len= 1193  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+[TRANSFER EVENT] Episode 600/1800
+  [UNCERTAINTY] A0=0.003398 | A1=0.003502 | A2=0.003630 | A3=0.003562 | A4=0.003446
+  [UNCERTAINTY] min=A0
+  ★ Teacher Selected: Agent 0
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+    ↳ Transferred 10000 experiences -> Agent 4
+
+
+[STATS] episode=   650  elapsed_s=  18977.3  cum_steps=   1847738
+        mean_ep_len=  582.5  max_ep_len= 1059  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 700/1800 | Train Calls: 1741160 | Elapsed: 20601.4s | Recent Avg Reward: 330.00
+
+
+[STATS] episode=   700  elapsed_s=  20601.4  cum_steps=   1992776
+        mean_ep_len=  580.2  max_ep_len= 1041  n_truncated=   0  (block of 250 agent-eps)
+
+
+[STATS] episode=   750  elapsed_s=  22230.2  cum_steps=   2136318
+        mean_ep_len=  574.2  max_ep_len= 1041  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 800/1800 | Train Calls: 2027290 | Elapsed: 23854.6s | Recent Avg Reward: 252.00
+
+
+[STATS] episode=   800  elapsed_s=  23854.6  cum_steps=   2278906
+        mean_ep_len=  570.4  max_ep_len=  871  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+[TRANSFER EVENT] Episode 800/1800
+  [UNCERTAINTY] A0=0.003478 | A1=0.003442 | A2=0.005854 | A3=0.005586 | A4=0.003521
+  [UNCERTAINTY] min=A1
+  ★ Teacher Selected: Agent 1
+    ↳ Transferred 10000 experiences -> Agent 0
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+    ↳ Transferred 10000 experiences -> Agent 4
+
+
+[STATS] episode=   850  elapsed_s=  25483.5  cum_steps=   2421274
+        mean_ep_len=  569.5  max_ep_len= 1029  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 900/1800 | Train Calls: 2309588 | Elapsed: 27075.9s | Recent Avg Reward: 392.00
+
+
+[STATS] episode=   900  elapsed_s=  27075.9  cum_steps=   2561204
+        mean_ep_len=  559.7  max_ep_len= 1041  n_truncated=   0  (block of 250 agent-eps)
+
+
+[STATS] episode=   950  elapsed_s=  28717.9  cum_steps=   2707038
+        mean_ep_len=  583.3  max_ep_len=  999  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 1000/1800 | Train Calls: 2598240 | Elapsed: 30327.4s | Recent Avg Reward: 396.00
+
+
+[STATS] episode=  1000  elapsed_s=  30327.4  cum_steps=   2849856
+        mean_ep_len=  571.3  max_ep_len= 1025  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+[TRANSFER EVENT] Episode 1000/1800
+  [UNCERTAINTY] A0=0.003275 | A1=0.003955 | A2=0.005044 | A3=0.004095 | A4=0.003315
+  [UNCERTAINTY] min=A0
+  ★ Teacher Selected: Agent 0
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+    ↳ Transferred 10000 experiences -> Agent 4
+
+
+[STATS] episode=  1050  elapsed_s=  31942.2  cum_steps=   29933522
+        mean_ep_len=  574.0  max_ep_len= 1023  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 1100/1800 | Train Calls: 2883502 | Elapsed: 33541.8s | Recent Avg Reward: 466.00
+
+
+[STATS] episode=  1100  elapsed_s=  33541.8  cum_steps=   3135118
+        mean_ep_len=  567.1  max_ep_len= 1071  n_truncated=   0  (block of 250 agent-eps)
+
+
+[STATS] episode=  1150  elapsed_s=  35133.0  cum_steps=   3276026
+        mean_ep_len=  563.6  max_ep_len=  981  n_truncated=   0  (block of 250 agent-eps)
+
+Episode 1200/1800 | Train Calls: 3171030 | Elapsed: 36785.5s | Recent Avg Reward: 228.00
+
+
+[STATS] episode=  1200  elapsed_s=  36785.5  cum_steps=   3422646
+        mean_ep_len=  586.5  max_ep_len= 1063  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+[TRANSFER EVENT] Episode 1200/1800
+  [UNCERTAINTY] A0=0.003532 | A1=0.003681 | A2=0.003661 | A3=0.003536 | A4=0.003454
+  [UNCERTAINTY] min=A4
+  ★ Teacher Selected: Agent 4
+    ↳ Transferred 10000 experiences -> Agent 0
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+
+
+[STATS] episode=  1250  elapsed_s=  38395.3  cum_steps=   3565082
+        mean_ep_len=  569.7  max_ep_len=  939  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 1300/1800 | Train Calls: 3453260 | Elapsed: 39977.5s | Recent Avg Reward: 700.00
+
+
+[STATS] episode=  1300  elapsed_s=  39977.5  cum_steps=   3704876
+        mean_ep_len=  559.2  max_ep_len= 1077  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+[STATS] episode=  1350  elapsed_s=  41593.2  cum_steps=   3846564
+        mean_ep_len=  566.8  max_ep_len=  973  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 1400/1800 | Train Calls: 3737174 | Elapsed: 43199.0s | Recent Avg Reward: 294.00
+
+
+[STATS] episode=  1400  elapsed_s=  43199.0  cum_steps=   3988790
+        mean_ep_len=  568.9  max_ep_len= 1009  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+[TRANSFER EVENT] Episode 1400/1800
+  [UNCERTAINTY] A0=0.003662 | A1=0.003680 | A2=0.003652 | A3=0.003581 | A4=0.003284
+  [UNCERTAINTY] min=A4
+  ★ Teacher Selected: Agent 4
+    ↳ Transferred 10000 experiences -> Agent 0
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+
+
+[STATS] episode=  1450  elapsed_s=  44784.5  cum_steps=   4129640
+        mean_ep_len=  563.4  max_ep_len= 1317  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 1500/1800 | Train Calls: 4016838 | Elapsed: 46364.5s | Recent Avg Reward: 208.00
+
+
+[STATS] episode=  1500  elapsed_s=  46364.5  cum_steps=   4268454
+        mean_ep_len=  555.3  max_ep_len= 1019  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+
+[STATS] episode=  1550  elapsed_s=  47973.5  cum_steps=   4409122
+        mean_ep_len=  562.7  max_ep_len= 1013  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 1600/1800 | Train Calls: 4299414 | Elapsed: 49579.4s | Recent Avg Reward: 248.00
+
+
+[STATS] episode=  1600  elapsed_s=  49579.4  cum_steps=   4551030
+        mean_ep_len=  567.6  max_ep_len= 1303  n_truncated=   0  (block of 250 agent-eps)
+
+
+[TRANSFER EVENT] Episode 1600/1800
+  [UNCERTAINTY] A0=0.003699 | A1=0.003604 | A2=0.004022 | A3=0.004000 | A4=0.003352
+  [UNCERTAINTY] min=A4
+  ★ Teacher Selected: Agent 4
+    ↳ Transferred 10000 experiences -> Agent 0
+    ↳ Transferred 10000 experiences -> Agent 1
+    ↳ Transferred 10000 experiences -> Agent 2
+    ↳ Transferred 10000 experiences -> Agent 3
+
+
+[STATS] episode=  1650  elapsed_s=  51179.8  cum_steps=   4690606
+        mean_ep_len=  558.3  max_ep_len= 1079  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 1700/1800 | Train Calls: 4576864 | Elapsed: 52747.4s | Recent Avg Reward: 340.00
+
+
+[STATS] episode=  1700  elapsed_s=  52747.4  cum_steps=   4828480
+        mean_ep_len=  551.5  max_ep_len=  947  n_truncated=   0  (block of 250 agent-eps)
+
+
+
+
+[STATS] episode=  1750  elapsed_s=  54370.4  cum_steps=   4967884
+        mean_ep_len=  557.6  max_ep_len=  921  n_truncated=   0  (block of 250 agent-eps)
+
+
+Episode 1800/1800 | Train Calls: 4853914 | Elapsed: 55977.7s | Recent Avg Reward: 216.00
+
+
+[STATS] episode=  1800  elapsed_s=  55977.7  cum_steps=   5105530
+        mean_ep_len=  550.6  max_ep_len= 1067  n_truncated=   0  (block of 250 agent-eps)
+
+
+  [Saved Model] results/pacman/models_seed7/sim_0\agent_0.pth
+  [Saved Model] results/pacman/models_seed7/sim_0\agent_1.pth
+  [Saved Model] results/pacman/models_seed7/sim_0\agent_2.pth
+  [Saved Model] results/pacman/models_seed7/sim_0\agent_3.pth
+  [Saved Model] results/pacman/models_seed7/sim_0\agent_4.pth
+
+[SUCCESS] experiment completed. Results saved to results/pacman/efo_tl_results_seed7.csv

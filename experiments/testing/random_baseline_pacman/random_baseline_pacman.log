@@ -1,0 +1,75 @@
+[LOG STARTED] random_baseline_pacman.py — 2026-08-13 22:43:43
+
+======================================================================
+  RANDOM BASELINE EXPERIMENT — MsPacman-v5
+  Simulations: 1 | Agents: 5 | Episodes/sim: 500 | Seed: 42
+======================================================================
+
+======================================================================
+  RUNNING Random Baseline (MsPacman-v5)
+  Simulation: 0 | Agents: 5 | Episodes: 500
+======================================================================
+
+======================================================================
+  ENVIRONMENT CONFIGURATION
+======================================================================
+  env.spec.id               : ALE/MsPacman-v5
+  env.spec.max_episode_steps : None
+  observation_space          : Box(0, 255, (128,), uint8)
+  action_space               : Discrete(9)
+  frameskip                   : N/A
+  _frameskip                  : 4
+  repeat_action_probability   : N/A
+  full_action_space           : N/A
+  obs_type                    : N/A
+  render_mode                 : None
+  ale.getFloat('repeat_action_probability') : 0.25
+  ale.getInt('frame_skip') : 1
+  ale.getBool('color_averaging') : False
+======================================================================
+
+  Episode   50/500 | Elapsed:    62.6s | Last-50-ep Avg Reward: 272.72
+  Episode  100/500 | Elapsed:   124.2s | Last-50-ep Avg Reward: 257.84
+  Episode  150/500 | Elapsed:   185.5s | Last-50-ep Avg Reward: 248.68
+  Episode  200/500 | Elapsed:   248.9s | Last-50-ep Avg Reward: 273.04
+  Episode  250/500 | Elapsed:   310.7s | Last-50-ep Avg Reward: 264.84
+  Episode  300/500 | Elapsed:   374.9s | Last-50-ep Avg Reward: 255.32
+  Episode  350/500 | Elapsed:   439.0s | Last-50-ep Avg Reward: 255.88
+  Episode  400/500 | Elapsed:   503.2s | Last-50-ep Avg Reward: 267.12
+  Episode  450/500 | Elapsed:   568.8s | Last-50-ep Avg Reward: 257.16
+  Episode  500/500 | Elapsed:   633.7s | Last-50-ep Avg Reward: 259.80
+
+  [DONE] Simulation 0 finished in 633.7s
+
+  [CSV SAVED] C:\Users\Usuario\Documents\YachayTech\Research_Projects\Transfer_Learning_RL\code\efo_tl_pacman\Expert-Free-Online-Transfer-Learning-Algorithm\experiments\testing\results\pacman\random_baseline_results.csv
+
+======================================================================
+  FINAL STATISTICS  —  Random Baseline (all agents, all episodes)
+======================================================================
+  Total episodes        : 2500
+  Mean reward           : 261.2400
+  Median reward         : 240.0000
+  Std deviation         : 138.0602
+  Min / Max reward      : 70.0 / 2090.0
+  Q25 (25th percentile) : 200.0000
+  Q75 (75th percentile) : 290.0000
+  IQR (Q75 − Q25)      : 90.0000
+  P5  (5th percentile)  : 140.0000
+  P10 (10th percentile) : 160.0000
+  P90 (90th percentile) : 350.0000
+  P95 (95th percentile) : 420.0000
+======================================================================
+
+  PER-AGENT BREAKDOWN
+----------------------------------------------------------------------
+  Agent 0:  mean=259.56  median=240.00  std=130.10  min=70  max=1810
+  Agent 1:  mean=264.38  median=240.00  std=150.90  min=70  max=1950
+  Agent 2:  mean=270.56  median=240.00  std=169.41  min=80  max=2090
+  Agent 3:  mean=256.02  median=240.00  std=102.97  min=70  max=990
+  Agent 4:  mean=255.68  median=230.00  std=127.07  min=80  max=1770
+----------------------------------------------------------------------
+
+
+  [LOG SAVED] C:\Users\Usuario\Documents\YachayTech\Research_Projects\Transfer_Learning_RL\code\efo_tl_pacman\Expert-Free-Online-Transfer-Learning-Algorithm\experiments\testing\random_baseline_pacman.log
+  Experiment complete.
+
