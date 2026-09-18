@@ -139,6 +139,8 @@ def set_seed(inSEED):
     if SEED:
         torch.manual_seed(SEED)
         random.seed(SEED)
+        np.random.seed(SEED)
+        torch.cuda.manual_seed_all(SEED)
 
 _BETA_START=.4
 
@@ -387,7 +389,6 @@ class agent:
         self.replay_buffer.update_priorities(batch_indices, (loss_v + 1e-5).data.cpu().numpy())
         self.learn_iter+=1
         if(self.learn_iter%self.update_iter==0):
-            print("Updating target network.")
             self.target_net.load_state_dict(self.Qnet.state_dict())       
         return composed_loss.mean().tolist()
 
