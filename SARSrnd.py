@@ -15,78 +15,121 @@ RND_PARAMS_FILENAME="RND_parameters.pkl"
 
 
 class net(nn.Module):
-    def __init__(self, n_s, n_a, rew_dim, s_encode_size,n_latent_var=[], act=nn.ReLU()):
-        assert(type(n_latent_var)==list), "n_latenr_var is not a list."
+    """
+    Multi-Layer Perceptron (MLP) architecture used for both the fixed RND target 
+    network and the trainable predictor network.
+    
+    Inputs the concatenated transition vector [s, a, r, s'] and maps it into an 
+    embedding space of dimension 's_encode_size'.
+    """
+    def __init__(self, n_s, n_a, rew_dim, s_encode_size, n_latent_var=[], act=nn.ReLU()):
+        assert(type(n_latent_var)==list), "n_latent_var is not a list."
         super(net, self).__init__()
-        _layers= np.concatenate(([n_s*2+rew_dim+n_a], n_latent_var, [s_encode_size]))
-        self.layers=nn.ModuleList(nn.Linear(int(_layers[idx]), int(_layers[idx+1])) for idx in range(0, len(_layers)-1))
-        self.act=act
+        _layers = np.concatenate(([n_s*2 + rew_dim + n_a], n_latent_var, [s_encode_size]))
+        self.layers = nn.ModuleList(nn.Linear(int(_layers[idx]), int(_layers[idx+1])) for idx in range(0, len(_layers)-1))
+        self.act = act
 
     def forward(self, x):
         for l in self.layers[:-1]:
-            x= self.act(l(x))
+            x = self.act(l(x))
         return self.layers[-1](x)
 
 
-
-"""
-
-@param:  minibatch_size if != 1 the network has a delay into estimating the updated uncertainty but the training will be faster.
-
-
-"""
 class UE():
-    def __init__(self, n_s,n_a, rew_dim=1, lr=1e-3, id="SARS-rnd", s_encode_size=1024,n_latent_var=[], device= None, minibatch_size=1):
+    """
+    Uncertainty Estimator (UE) based on Random Network Distillation (RND).
+    
+    Operates on (State, Action, Reward, Next_State) transitions to quantify 
+    the epistemic uncertainty (familiarity) of the reinforcement learning agent.
+    
+    Consists of two networks:
+      - 'rnd_net' (Target): Fixed, randomly initialized network that serves as a 
+        deterministic mapping / continuous pseudo-hash function.
+      - 'pred_net' (Predictor): Trainable network that learns to mimic 'rnd_net' 
+        solely on visited transitions.
+    
+    Uncertainty is defined as the Prediction Error: MSE(pred_net(x), rnd_net(x)).
+    Frequently visited transitions yield low error (low uncertainty), whereas 
+    rare or unvisited transitions yield high error (high uncertainty).
+    """
+    def __init__(self, n_s, n_a, rew_dim=1, lr=1e-3, id="SARS-rnd", s_encode_size=1024, n_latent_var=[], device=None, minibatch_size=1):
         self.n_s = n_s
         self.n_a = n_a
-        self.rew_dim= rew_dim
+        self.rew_dim = rew_dim
         self.lr = lr
         self.s_encode_size = s_encode_size
-        self.id=id
-        self.n_latent_var=n_latent_var
-        self.temp_batch=[]
-        self.minibatch_size=minibatch_size
-        self.device=device    
+        self.id = id
+        self.n_latent_var = n_latent_var
+        self.temp_batch = []
+        self.minibatch_size = minibatch_size
+        self.device = device    
         self._initialize()
 
-    def get_uncertainty(self,s,a, r, n_s):
+    def get_uncertainty(self, s, a, r, n_s):
+        """
+        Computes the epistemic uncertainty for a single (s, a, r, s') transition.
+        
+        Evaluates the mean squared difference between the predictor and target networks 
+        without updating network parameters.
+        """
         if(type(a)!= list):
             a=[a]
         if(type(r)!= list):
             r=[r]
-        x=np.concatenate( (s,a,r,n_s) )
+        x = np.concatenate((s, a, r, n_s))
         return self._compute_uncertainty(x).mean().tolist()
     
     def _compute_uncertainty(self, x):
-        x=torch.FloatTensor(np.array(x)).to(self.device)
+        """
+        Forward pass through both networks.
+        Calculates squared error ((pred_net(x) - rnd_net(x)) ** 2).
+        Target network 'rnd_net' is evaluated under torch.no_grad().
+        """
+        x = torch.FloatTensor(np.array(x)).to(self.device)
         with torch.no_grad():
-            y1=self.rnd_net(x)
-        y2=self.pred_net(x)
-        return ((y2-y1)**2)
+            y1 = self.rnd_net(x)  # Fixed target output (pseudo-hash)
+        y2 = self.pred_net(x)      # Trainable predictor output
+        return ((y2 - y1)**2)
     
-    def learn(self, s,a, r, n_s):
+    def learn(self, s, a, r, n_s):
+        """
+        Updates the predictor network ('pred_net') with the current transition.
+        
+        As the predictor network trains on visited transitions, its prediction error 
+        against the fixed target network decreases, effectively lowering future 
+        uncertainty estimates for similar states.
+        """
         if(type(a)!= list):
             a=[a]
         if(type(r)!= list):
             r=[r]
-        x=np.concatenate( (s,a,r,n_s) )
+        x = np.concatenate((s, a, r, n_s))
         self.temp_batch.append(x)
-        if(len(self.temp_batch)<self.minibatch_size):
-            with(torch.no_grad()):
-                loss=self._compute_uncertainty(x)
+        if(len(self.temp_batch) < self.minibatch_size):
+            with torch.no_grad():
+                loss = self._compute_uncertainty(x)
             return loss.mean().tolist()
-        complessive_loss=self._get_multi_uncertainty(self.temp_batch)
+        
+        # Optimize predictor network to minimize MSE against target network
+        complessive_loss = self._get_multi_uncertainty(self.temp_batch)
         self.optimizer.zero_grad()
         complessive_loss.mean().backward()
         self.optimizer.step()
-        self.temp_batch=[]
+        self.temp_batch = []
         return complessive_loss[-1].tolist()
 
-    def get_uncertainty_from_batch(self, s,a, r, n_s):
-        x=np.array([np.concatenate( (s[i],[ a[i], r[i], n_s[i]])) for i in range(len(a))])
+    def get_uncertainty_from_batch(self, s, a, r, n_s):
+        """
+        Computes uncertainties for a batch of transitions provided as separate arrays.
+        """
+        x = np.array([np.concatenate((s[i], [a[i], r[i], n_s[i]])) for i in range(len(a))])
         return self._get_multi_uncertainty(x).tolist()
 
     def _get_multi_uncertainty(self, x):
+        """
+        Batched uncertainty calculation used during training and transfer evaluation.
+        Returns the mean squared error across the embedding dimension (axis=-1).
+        """
         return self._compute_uncertainty(x).mean(axis=-1)
 
     def save(self, path, subfolderName="SARSrnd"):
