@@ -29,6 +29,9 @@ class buffer(deque):
     #    return interaction[self.idxs_mapper["Uncertainty"]]
 
     def get_avg_uncertainty(self):
+        """
+        Computes the aritmetic mean of the uncertainties of the interactions in the buffer.
+        """
         return np.mean(transpose(self)[self.idxs_mapper["Uncertainty"]])
 
     def get_all_uncertainties(self):

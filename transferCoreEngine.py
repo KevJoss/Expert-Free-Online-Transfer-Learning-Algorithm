@@ -20,6 +20,24 @@ def estimate_surprise(target_agent,batch):
 
 
 def estimate_uncertainty(target_estimator, batch):
+    """
+    Estimates the epistemic uncertainty that the target agent (student) has
+    regarding a batch of transitions collected by the source agent (teacher).
+
+    Splits the full batch into smaller chunks (max_batch_size = 32) to perform
+    batched inference on the RND (Random Network Distillation) network without
+    exceeding memory limits.
+
+    Args:
+        target_estimator (SARSrnd): Uncertainty estimator instance associated
+            with the target agent.
+        batch (np.ndarray): Array of concatenated [s, a, r, s'] transitions
+            extracted from the transfer buffer.
+
+    Returns:
+        np.ndarray: 1D array containing the computed uncertainty values for
+        each transition in the batch.
+    """
     max_batch_size=32
     idxs= [x for x in range(0, len(batch), max_batch_size)]
     uncertainties=[]
@@ -36,6 +54,31 @@ def estimate_uncertainty(target_estimator, batch):
 
 
 def select_teacher(agents, mode, transfer_buffers, ep_start_sharing, evaluation_range):
+    """
+    Dynamically selects which concurrent agent will act as the teacher 
+    (knowledge source) during the transfer event.
+
+    Supported selection modes ('mode'):
+        - 'best_performance': Selects the agent with the highest recent average 
+          reward over the last 'evaluation_range' episodes.
+        - 'avg_uncertainty': Selects the agent with the LOWEST average uncertainty 
+          in its transfer buffer, identifying it as the agent with the highest 
+          certainty and best consolidated model over its explored environment.
+
+    Args:
+        agents (list): List of concurrently training RL agents.
+        mode (str): Source selection strategy ('best_performance' or 'avg_uncertainty').
+        transfer_buffers (list): List of transfer buffer instances (one per agent) 
+            containing recorded transitions and computed uncertainties.
+        ep_start_sharing (int): Minimum episode threshold required before enabling 
+            knowledge transfer between agents.
+        evaluation_range (int): Number of recent episodes to consider when computing 
+            mean reward for 'best_performance' mode.
+
+    Returns:
+        agent or None: The selected teacher agent, or None if the warm-up threshold 
+        'ep_start_sharing' has not yet been reached.
+    """
     if(mode=="best_performance"):
         maxR= -math.inf
         teacher=None
